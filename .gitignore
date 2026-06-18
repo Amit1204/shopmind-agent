@@ -1,0 +1,30 @@
+# Environment
+.env
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Data (too large for git)
+data/datasets/*.csv
+data/datasets/*.json
+outputs/faiss_index/
+outputs/chroma_db/
+outputs/models/
+
+# ML artifacts
+*.pkl
+*.joblib
+mlruns/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

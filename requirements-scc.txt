@@ -1,0 +1,48 @@
+# ── BU SCC Training Requirements (GPU) ────────────────────────────────────────
+# Install on SCC with: pip install -r requirements-scc.txt --break-system-packages
+# Or inside a venv: pip install -r requirements-scc.txt
+
+# PyTorch with CUDA (SCC has CUDA 11.8)
+torch==2.1.0
+torchvision==0.16.0
+
+# Transformers + training
+transformers==4.40.0
+datasets==2.18.0
+accelerate==0.29.0
+evaluate==0.4.1
+scikit-learn==1.4.2
+
+# NLP / Embeddings
+sentence-transformers==2.7.0
+tokenizers==0.19.1
+
+# Vector stores
+faiss-gpu==1.7.2
+chromadb==0.5.0
+
+# LangChain (for build_index only — no LLM needed on SCC)
+langchain==0.2.0
+langchain-community==0.2.0
+
+# ML models
+xgboost==2.0.3
+joblib==1.4.0
+
+# Data
+pandas==2.2.2
+numpy==1.26.4
+tqdm==4.66.2
+requests==2.31.0
+
+# Observability
+mlflow==2.13.0
+
+# Image support (CLIP for visual index)
+Pillow==10.3.0
+open-clip-torch==2.24.0
+
+# Utilities
+python-dotenv==1.0.1
+pydantic-settings==2.2.1
+rank-bm25==0.2.2

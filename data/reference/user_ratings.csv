@@ -1,0 +1,8 @@
+user_id,product_id,rating
+demo_user,B07XJ8C8F5,5.0
+demo_user,B08N5WRWNW,4.0
+demo_user,B09B8YWXDF,3.0
+alice,B07XJ8C8F5,4.0
+alice,B08FT5NM38,5.0
+bob,B08N5WRWNW,2.0
+bob,B09B8YWXDF,4.0

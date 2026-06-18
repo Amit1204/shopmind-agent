@@ -1,0 +1,59 @@
+version: "3.9"
+
+services:
+
+  backend:
+    build: .
+    command: uvicorn api.app:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app                         # hot reload during dev
+      - ./outputs:/app/outputs         # persist indexes and models
+      - ./data:/app/data               # share datasets
+    environment:
+      - PYTHONPATH=/app
+    env_file: .env
+    depends_on:
+      - ollama
+
+  frontend:
+    build: .
+    command: streamlit run frontend/app.py --server.port 8501 --server.address 0.0.0.0
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+    env_file: .env
+    depends_on:
+      - backend
+
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  mlflow:
+    image: python:3.11-slim
+    command: >
+      sh -c "pip install mlflow -q && mlflow server
+             --host 0.0.0.0 --port 5000
+             --backend-store-uri sqlite:///mlflow.db
+             --default-artifact-root ./mlruns"
+    ports:
+      - "5000:5000"
+    volumes:
+      - mlflow_data:/mlflow
+
+volumes:
+  ollama_data:
+  mlflow_data:

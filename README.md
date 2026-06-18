@@ -131,16 +131,3 @@ shopmind-agent/
 
 ---
 
-## 9-Week Roadmap
-
-| Week | Focus |
-|------|-------|
-| 1 | Data pipeline + project setup |
-| 2 | Visual search (CLIP + FAISS) |
-| 3 | ABSA + fake review classifier |
-| 4 | RAG pipeline (review_qa) |
-| 5 | Recommender + product lookup |
-| 6 | LangGraph agent + all tools wired |
-| 7 | Multi-turn memory + edge cases |
-| 8 | FastAPI + Docker + monitoring |
-| 9 | Polish + evaluation + demo |

@@ -9,6 +9,7 @@ Features:
   - Safety validation before responding
 """
 import asyncio
+import json
 from dataclasses import dataclass, field
 from typing import Any
 from langgraph.prebuilt import create_react_agent
@@ -119,14 +120,25 @@ class ShopMindAgent:
         products_in_response = []
 
         for msg in result["messages"]:
+            # Extract tool names from AI messages
             if hasattr(msg, "tool_calls"):
                 for tc in msg.tool_calls:
                     tools_used.append(tc["name"])
-            if hasattr(msg, "content") and isinstance(msg.content, dict):
-                if "confidence" in msg.content:
-                    confidence_scores.append(msg.content["confidence"])
-                if "evidence" in msg.content:
-                    evidence.extend(msg.content["evidence"])
+            # Extract confidence/evidence from ToolMessages (content is a JSON string)
+            if hasattr(msg, "content") and msg.content:
+                parsed = None
+                if isinstance(msg.content, dict):
+                    parsed = msg.content
+                elif isinstance(msg.content, str):
+                    try:
+                        parsed = json.loads(msg.content)
+                    except (json.JSONDecodeError, ValueError):
+                        pass
+                if parsed:
+                    if "confidence" in parsed:
+                        confidence_scores.append(float(parsed["confidence"]))
+                    if "evidence" in parsed:
+                        evidence.extend(parsed["evidence"])
 
         # Step 5: Aggregate confidence
         overall_confidence = (

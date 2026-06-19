@@ -263,8 +263,3 @@ GET /health  →  {"status": "ok"}
 
 ---
 
-## Author
-
-**Sufiyan Ahmed** — [sufiyanahmed4902@gmail.com](mailto:sufiyanahmed4902@gmail.com)
-
-Built as a portfolio project targeting ML/AI/DS roles. Demonstrates: LangGraph agentic patterns, RAG pipelines, model fine-tuning on HPC clusters, multimodal search, and production API design.
